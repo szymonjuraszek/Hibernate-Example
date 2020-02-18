@@ -17,9 +17,9 @@ public class Security implements Serializable, Cloneable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "security_id")
-    private List<SixMarketMapping> sixMarketMappings;
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "security_id")
+//    private List<SixMarketMapping> sixMarketMappings;
 
     public Security clone() throws CloneNotSupportedException
     {

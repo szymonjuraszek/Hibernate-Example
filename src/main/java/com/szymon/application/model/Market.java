@@ -3,6 +3,7 @@ package com.szymon.application.model;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,13 +18,14 @@ public class Market implements Serializable, Cloneable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NaturalId
     private String externalId;
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "market_id")
-    private List<SixMarketMapping> sixMarketMappings;
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "market_id")
+//    private List<SixMarketMapping> sixMarketMappings;
 
     public Market clone() throws CloneNotSupportedException
     {

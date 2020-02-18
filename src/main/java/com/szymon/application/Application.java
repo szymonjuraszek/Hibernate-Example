@@ -102,6 +102,9 @@ public class Application extends SpringBootServletInitializer implements Command
 
         SomeClass f = new SomeClass();
 
+        System.out.println("Insert dla Market");
+
+
     }
 
     @Override

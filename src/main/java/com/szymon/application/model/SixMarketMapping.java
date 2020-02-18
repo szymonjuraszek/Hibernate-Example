@@ -17,9 +17,11 @@ public class SixMarketMapping implements Serializable, Cloneable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "market_id")
     private Market market;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "security_id")
     private Security security;
 
     public SixMarketMapping clone() throws CloneNotSupportedException
