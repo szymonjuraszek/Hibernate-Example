@@ -3,28 +3,15 @@ package com.szymon.application.dao;
 import com.szymon.application.model.Address;
 import com.szymon.application.model.Employee;
 import com.szymon.application.model.MapperClass;
-import com.szymon.application.service.EmployeeService;
-import jdk.internal.org.objectweb.asm.Type;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import sun.rmi.transport.ObjectTable;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
-import javax.swing.text.html.Option;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.*;
 
 import static com.szymon.application.dao.utility.UtilityDao.findOrEmpty;
@@ -164,19 +151,19 @@ public class EmployeeRepository implements IEmployeeDao{
         return session.createQuery(sql, MapperClass.class).setParameter("id", id).list();
     }
 
-    public List<MapperClassExample> getMapperClassInnerClass() {
-        Session session = entityManager.unwrap(Session.class);
-        Long id = 3L;
-        String sql = "SELECT new MapperClassExample(a.zipcode, a.city, e.id) FROM Employee e inner JOIN e.address a WHERE e.id = :id";
-
-//        List<IEmployeeDao.MapperClassExample> f = new ArrayList<>();
-//        f.add(new MapperClassExample());
-
-
-
-
-        return session.createQuery(sql, IEmployeeDao.MapperClassExample.class).setParameter("id", id).list();
-    }
+//    public List<MapperClassExample> getMapperClassInnerClass() {
+//        Session session = entityManager.unwrap(Session.class);
+//        Long id = 3L;
+//        String sql = "SELECT new MapperClassExample(a.zipcode, a.city, e.id) FROM Employee e inner JOIN e.address a WHERE e.id = :id";
+//
+////        List<IEmployeeDao.MapperClassExample> f = new ArrayList<>();
+////        f.add(new MapperClassExample());
+//
+//
+//
+//
+//        return session.createQuery(sql, IEmployeeDao.MapperClassExample.class).setParameter("id", id).list();
+//    }
 
     public static Employee getTestEmployee() {
         date_example = new Date();

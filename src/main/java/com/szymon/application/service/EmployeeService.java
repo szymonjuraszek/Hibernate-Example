@@ -63,8 +63,8 @@ public class EmployeeService {
         return employeeRepository.getMapperClass();
     }
 
-    @Transactional
-    public List<IEmployeeDao.MapperClassExample> getMapperClassInnerClass() {
-        return employeeRepository.getMapperClassInnerClass();
-    }
+//    @Transactional
+//    public List<IEmployeeDao.MapperClassExample> getMapperClassInnerClass() {
+//        return employeeRepository.getMapperClassInnerClass();
+//    }
 }

@@ -1,44 +1,57 @@
 package com.szymon.application;
 
+import com.example.demo.SomeClass;
+import com.szymon.application.config.IBeanExample;
 import com.szymon.application.model.Employee;
 import com.szymon.application.model.Example;
 import com.szymon.application.service.EmployeeService;
 import com.szymon.application.service.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class Application extends SpringBootServletInitializer implements CommandLineRunner {
+
+    private final ExampleService exampleService;
+
+    private final ApplicationContext appContext;
+
+    private final EmployeeService employeeService;
+
+    private final IBeanExample createBeanExample;
 
     @Autowired
-    private ExampleService exampleService;
-
-    @Autowired
-    private ApplicationContext appContext;
-
-    @Autowired
-    private EmployeeService employeeService;
+    public Application (
+            ExampleService exampleService,
+            ApplicationContext appContext,
+            EmployeeService employeeService,
+            IBeanExample createBeanExample
+    ) {
+        this.employeeService = employeeService;
+        this.exampleService = exampleService;
+        this.appContext = appContext;
+        this.createBeanExample = createBeanExample;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
-
     @Override
-    public void run(String... args) throws Exception {
-//        String[] allBeanNames = appContext.getBeanDefinitionNames();
-//        for(String beanName : allBeanNames) {
-//            System.out.println(beanName);
-//        }
+    public void run(String... args) {
+        String[] allBeanNames = appContext.getBeanDefinitionNames();
+        for(String beanName : allBeanNames) {
+            System.out.println(beanName);
+        }
 
         System.out.println("-----------------------------------------------------------------");
         System.out.println("Runner start:");
@@ -82,7 +95,17 @@ public class Application implements CommandLineRunner {
 
         System.out.println("Pobieram dane z cusomowej klasy:");
         System.out.println(employeeService.getMapperClass().get(0).getCity());
-        System.out.println(employeeService.getMapperClassInnerClass().get(0).getCity());
+//        System.out.println(employeeService.getMapperClassInnerClass().get(0).getCity());
 
+        System.out.println("Check bean:");
+        createBeanExample.showBean();
+
+        SomeClass f = new SomeClass();
+
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(Application.class);
     }
 }
