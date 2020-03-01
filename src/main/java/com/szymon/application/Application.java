@@ -1,11 +1,12 @@
 package com.szymon.application;
 
-import com.example.demo.SomeClass;
 import com.szymon.application.config.IBeanExample;
 import com.szymon.application.model.Employee;
 import com.szymon.application.model.Example;
+import com.szymon.application.model.Market;
 import com.szymon.application.service.EmployeeService;
 import com.szymon.application.service.ExampleService;
+import com.szymon.application.service.MarketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,17 +30,20 @@ public class Application extends SpringBootServletInitializer implements Command
 
     private final IBeanExample createBeanExample;
 
+    private final MarketService marketService;
+
     @Autowired
-    public Application (
+    public Application(
             ExampleService exampleService,
             ApplicationContext appContext,
             EmployeeService employeeService,
-            IBeanExample createBeanExample
-    ) {
+            IBeanExample createBeanExample,
+            MarketService marketService) {
         this.employeeService = employeeService;
         this.exampleService = exampleService;
         this.appContext = appContext;
         this.createBeanExample = createBeanExample;
+        this.marketService = marketService;
     }
 
     public static void main(String[] args) {
@@ -100,9 +104,17 @@ public class Application extends SpringBootServletInitializer implements Command
         System.out.println("Check bean:");
         createBeanExample.showBean();
 
-        SomeClass f = new SomeClass();
+        System.out.println("Insert Market");
 
-        System.out.println("Insert dla Market");
+//        Market market = new Market();
+
+//        market.setExternalId("3");
+//        market.setName("Sajmon");
+//
+//        marketService.save(market);
+//        marketService.check();
+
+        System.out.println("------------------------------------------------");
 
 
     }

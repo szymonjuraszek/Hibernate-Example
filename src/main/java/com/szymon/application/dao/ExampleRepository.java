@@ -6,15 +6,39 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ExampleRepository  {
 
-    public ExampleRepository() {
-    }
-
     @PersistenceContext
     private EntityManager entityManager;
+
+    public List<Example> getAllExample() {
+        String query = "SELECT e FROM Example e";
+
+        return entityManager.createQuery(query, Example.class).getResultList();
+    }
+
+    public Optional<Example> getExampleById(Long id) {
+        String query = "SELECT e FROM Example e WHERE e.id = :id";
+
+        return entityManager.createQuery(query, Example.class)
+                .setParameter("id", id)
+                .setMaxResults(1)
+                .getResultList()
+                .stream()
+                .findFirst();
+    }
+
+    public Example addExample(Example example) {
+        Session session = entityManager.unwrap(Session.class);
+
+        session.saveOrUpdate(example);
+
+        return example;
+    }
 
     public void saveByEntityManager(Example example) {
         Session session1 = entityManager.unwrap(Session.class);
